@@ -1,6 +1,12 @@
+import { Route, Routes } from 'react-router-dom';
+import { HOME_PAGE, MARKETPLACE } from './routes/routeConstant';
+
 function App() {
   return (
-    <h1 className="underline text-sky-500">Hello WOrld</h1>
+    <Routes>
+      <Route path={HOME_PAGE} Component={} />
+      <Route path={MARKETPLACE} Component={} />
+    </Routes>
   );
 }
 
