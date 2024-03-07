@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Red+Hat+Display:wght@400;500;600;700&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
+
 
 @layer base {
     html {

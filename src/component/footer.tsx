@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LogoMainGreen } from "./logo";
+import { LogoMainWhite } from "./logo";
 
 export const Footer = () => {
 
@@ -10,7 +10,7 @@ export const Footer = () => {
         <div className='flex border-0 pb-2 border-gray-200 solid border-b-[1px]'>
             
             <div className='flex-1'>
-                <LogoMainGreen />
+                <LogoMainWhite />
             </div>
 
             <div className='flex-2'>

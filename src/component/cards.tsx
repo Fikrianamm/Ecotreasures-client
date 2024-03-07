@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
 
-export const CardJenisSampah = ({ src, nama, href } : any) => {
+interface CardJenisSampah{
+    src: string,
+    nama: string,
+    href: string
+}
+
+interface CardLayanan{
+    img: string,
+    nama: string,
+    href: string,
+    desk: string
+}
+
+export const CardJenisSampah = ({ src, nama, href } : CardJenisSampah) => {
     return (
         <Link to={href} className="hov-b rounded-md bg-gray-50 m-3">
             <article
@@ -14,7 +27,7 @@ export const CardJenisSampah = ({ src, nama, href } : any) => {
     );
 };
 
-export const CardLayanan = ({ href, img, nama, desk } : any) => {
+export const CardLayanan = ({ href, img, nama, desk }: CardLayanan) => {
     return (
         <Link to={href}>
             <article

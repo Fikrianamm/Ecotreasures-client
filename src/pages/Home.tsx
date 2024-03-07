@@ -4,6 +4,24 @@ import { NavigationHome } from "../component/navigations";
 import { CardJenisSampah, CardLayanan } from "../component/cards";
 import { Footer } from "../component/footer";
 
+const Home = () => {
+  return (
+    <main>
+      <NavigationHome />
+      <HeroSection />
+      <div className="min-h-dvh">
+      <LayananSection />
+      <JenisSampahSection />
+      </div>
+      <section className="mt-8">
+        <Footer />
+      </section>
+    </main>
+  );
+};
+
+export default Home;
+
 const HeroSection = () => {
   return (
     <header className="hero-img h-[455px] w-full bg-center bg-cover relative">
@@ -120,21 +138,3 @@ const jenisSampahData = [
     </section>
   );
 };
-
-const Home = () => {
-  return (
-    <main>
-      <NavigationHome />
-      <HeroSection />
-      <div className="min-h-dvh">
-      <LayananSection />
-      <JenisSampahSection />
-      </div>
-      <section className="mt-8">
-        <Footer />
-      </section>
-    </main>
-  );
-};
-
-export default Home;
