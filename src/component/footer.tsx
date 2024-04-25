@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 import { LogoMainWhite } from "./logo";
 
 export const Footer = () => {
@@ -15,16 +17,16 @@ export const Footer = () => {
 
             <div className='flex-2'>
                 <ul className='flex space-x-4 text-gray-50 items-center'>
-                    <Link to={'/'}><li className='hov-b'>Marketplace</li></Link>
-                    <Link to={'/'}><li className='hov-b'>Pick Up</li></Link>
-                    <Link to={'/'}><li className='hov-b'>Drop Off</li></Link>
+                    <Link href={'/'}><li className='hov-b'>Marketplace</li></Link>
+                    <Link href={'/'}><li className='hov-b'>Pick Up</li></Link>
+                    <Link href={'/'}><li className='hov-b'>Drop Off</li></Link>
                 </ul>
             </div>
         
         </div>
         
         <div className='flex justify-center items-center'>
-            <span className='text-gray-50 text-lg flex'>© {currentYear} <Link to={'/'} className='hover:underline mr-1 ml-1'>Ecotreasures™.</Link> All Rights Reserved.</span>
+            <span className='text-gray-50 text-lg flex'>© {currentYear} <Link href={'/'} className='hover:underline mr-1 ml-1'>Ecotreasures™.</Link> All Rights Reserved.</span>
         </div>
     
     </footer>

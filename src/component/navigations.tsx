@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+'use client';
+
 import { LogoMainGreen, LogoMainWhite } from "./logo";
 import { ButtonLinkBorderBlack, ButtonLinkBorderWhite, ButtonLinkGreen } from "./buttons";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const Navigation: React.FC = () => {
 
@@ -27,12 +29,12 @@ export const Navigation: React.FC = () => {
       <div className="flex-2">
         <ul className={`flex space-x-4 text-slate-800 items-center`}>
           <li>
-            <Link to={"/"} className="hov-b hover:text-green-600">
+            <Link href={"/"} className="hov-b hover:text-green-600">
               Marketplace
             </Link>
           </li>
           <li>
-            <Link to={"#"} onClick={onDrop}>
+            <Link href={"#"} onClick={onDrop}>
                 <li className="hov-b hover:text-green-600 flex justify-center items-center gap-1">
                     Layanan {drop == 'hidden' ? <IoIosArrowDown /> : <IoIosArrowUp /> }
                 </li>
@@ -102,10 +104,10 @@ export const NavigationHome: React.FC = () => {
                         scroll ? "text-slate-800" : "text-gray-50"
                     } items-center`}
                 >
-                    <Link to={"/"}>
+                    <Link href={"/"}>
                         <li className="hov-b">Marketplace</li>
                     </Link>
-                    <Link to={"#"} onClick={onDrop}>
+                    <Link href={"#"} onClick={onDrop}>
                         <li className="hov-b flex justify-center items-center gap-1">
                             Layanan {drop == 'hidden' ? <IoIosArrowDown /> : <IoIosArrowUp /> }
                         </li>
@@ -140,8 +142,8 @@ export const DropdownLayanan = ({className} : Dropdown) => {
   return (
   <div className={`absolute bg-white p-1 rounded mt-2 ${className} shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]`}>
     <ul className="text-black text-sm">
-      <li className="hov-b bg-white px-2 py-1"><Link to="">Pick Up</Link></li>
-      <li className="hov-b bg-white px-2 py-1 border-t-[1px]"><Link to="">Drop Off</Link></li>
+      <li className="hov-b bg-white px-2 py-1"><Link href="">Pick Up</Link></li>
+      <li className="hov-b bg-white px-2 py-1 border-t-[1px]"><Link href="">Drop Off</Link></li>
     </ul>
   </div>
   )

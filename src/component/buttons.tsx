@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 
 interface ButtonProps{
     href: string,
@@ -13,7 +15,7 @@ export const ButtonLinkGreen = ({ href, children, className, title } : ButtonPro
     return (
         <Link
             title={title}
-            to={href}
+            href={href}
             className={`text-gray-50 bg-green-700 hover:bg-green-800 font-medium flex gap-2 items-center justify-center rounded-md px-4 py-2 ${className}`}
         >
             {children}
@@ -25,7 +27,7 @@ export const ButtonLinkBorderWhite = ({ href, children, className, title } : But
     return (
         <Link
             title={title}
-            to={href}
+            href={href}
             className={`text-white bg-transparent hover:text-green-500 hover:border-green-500 border border-white bg-green-700 font-medium flex gap-2 items-center justify-center rounded-md px-4 py-2 ${className}`}
         >
             {children}
@@ -37,7 +39,7 @@ export const ButtonLinkBorderBlack = ({ href, children, className, title } : But
     return (
         <Link
             title={title}
-            to={href}
+            href={href}
             className={`text-slate-500 bg-transparent hover:bg-green-50 border border-slate-400 font-medium flex gap-2 items-center justify-center rounded-md px-4 py-2 ${className}`}
         >
             {children}
@@ -65,7 +67,7 @@ export const CancelButton = ({ href, type }: ButtonProps) => {
   
     return (
       <Link
-        to={href}
+        href={href}
         onClick={cancel}
         className={className}
       >

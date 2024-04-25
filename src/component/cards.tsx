@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+'use client';
+import Link from "next/link";
 
 interface CardJenisSampah{
     src: string,
@@ -15,7 +16,7 @@ interface CardLayanan{
 
 export const CardJenisSampah = ({ src, nama, href } : CardJenisSampah) => {
     return (
-        <Link to={href} className="hov-b rounded-md bg-gray-50 m-3">
+        <Link href={href} className="hov-b rounded-md bg-gray-50 m-3">
             <article
                 title={nama}
                 className="flex flex-col w-[160px] h-[115px] space-y-4 p-2 border justify-center items-center border-gray-300 solid rounded-md"
@@ -29,7 +30,7 @@ export const CardJenisSampah = ({ src, nama, href } : CardJenisSampah) => {
 
 export const CardLayanan = ({ href, img, nama, desk }: CardLayanan) => {
     return (
-        <Link to={href}>
+        <Link href={href}>
             <article
                 title={nama}
                 className="hov-b bg-gray-50 flex-2 w-80 h-44 space-y-4 p-4 border border-gray-300 solid rounded-md"

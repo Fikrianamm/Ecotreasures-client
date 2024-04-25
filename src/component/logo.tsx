@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 
 export const LogoMainGreen = () => {
     return (
-      <Link to={"/"}>
+      <Link href={"/"}>
         
         <h1
           title="EcoTreasures"
@@ -17,7 +19,7 @@ export const LogoMainGreen = () => {
 
 export const LogoMainWhite = () => {
     return (
-        <Link to={"/"}>
+        <Link href={"/"}>
 
           <h1
             title="EcoTreasures"
