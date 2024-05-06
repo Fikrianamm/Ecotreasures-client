@@ -1,31 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export const LogoMainGreen = () => {
-    return (
-      <Link to={"/"}>
-        
-        <h1
-          title="EcoTreasures"
-          className="cursor-pointer font-breeSerif text-green-700 text-2xl"
-        >
-          EcoTreasures
-        </h1>
+interface ILogo {
+  type: 'white' | 'green'
+  className?: string
+}
 
-      </Link>
-    );
-};
+export default function Logo({ type, className }: ILogo) {
+  let style;
+  switch (type) {
+    case 'white':
+      style = 'text-gray-50';
+      break;
+    case 'green':
+      style = 'text-green-700';
+      break;
+    default:
+      style = 'text-green-700';
+      break;
+  }
 
-export const LogoMainWhite = () => {
-    return (
-        <Link to={"/"}>
+  return (
+    <Link to="/">
 
-          <h1
-            title="EcoTreasures"
-            className="cursor-pointer font-breeSerif text-gray-50 text-2xl"
-          >
-            EcoTreasures
-          </h1>
-          
-        </Link>
-      );
-};
+      <h1
+        title="EcoTreasures"
+        className={`text-2xl ${style} cursor-pointer font-breeSerif ${className}`}
+      >
+        EcoTreasures
+      </h1>
+
+    </Link>
+  );
+}

@@ -35,5 +35,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'off',
   },
 };

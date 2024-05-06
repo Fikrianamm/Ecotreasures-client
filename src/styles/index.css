@@ -10,6 +10,18 @@
     }
 }
 
+@layer components{
+    .btn-green{
+        @apply text-gray-50 bg-green-700 hover:bg-green-800
+    }
+    .btn-transparentWhite{
+        @apply text-white bg-transparent hover:text-green-500 hover:border-green-500 border border-white 
+    }
+    .btn-transparentGrey{
+        @apply text-slate-500 bg-transparent hover:bg-green-50 border border-slate-400
+    }
+}
+
 h1,
 p {
     cursor: default;

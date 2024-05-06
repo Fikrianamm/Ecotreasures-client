@@ -1,32 +1,38 @@
-import { Link } from "react-router-dom";
-import { LogoMainWhite } from "./logo";
+import { Link } from 'react-router-dom';
+import Logo from './logo';
 
-export const Footer = () => {
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
 
-    const currentYear = new Date().getFullYear();
-  
-    return (
-    <footer className='pt-5 pb-5 pr-10 space-y-6 pl-10 h-32 w-full bg-slate-800'>
-        <div className='flex border-0 pb-2 border-gray-200 solid border-b-[1px]'>
-            
-            <div className='flex-1'>
-                <LogoMainWhite />
-            </div>
+  return (
+    <footer className="w-full h-32 pt-5 pb-5 pl-10 pr-10 space-y-6 bg-slate-800">
+      <div className="flex border-0 pb-2 border-gray-200 solid border-b-[1px]">
 
-            <div className='flex-2'>
-                <ul className='flex space-x-4 text-gray-50 items-center'>
-                    <Link to={'/'}><li className='hov-b'>Marketplace</li></Link>
-                    <Link to={'/'}><li className='hov-b'>Pick Up</li></Link>
-                    <Link to={'/'}><li className='hov-b'>Drop Off</li></Link>
-                </ul>
-            </div>
-        
+        <div className="flex-1">
+          <Logo type="white" />
         </div>
-        
-        <div className='flex justify-center items-center'>
-            <span className='text-gray-50 text-lg flex'>© {currentYear} <Link to={'/'} className='hover:underline mr-1 ml-1'>Ecotreasures™.</Link> All Rights Reserved.</span>
+
+        <div className="flex-2">
+          <ul className="flex items-center space-x-4 text-gray-50">
+            <Link to="/"><li className="hov-b">Marketplace</li></Link>
+            <Link to="/"><li className="hov-b">Pick Up</li></Link>
+            <Link to="/"><li className="hov-b">Drop Off</li></Link>
+          </ul>
         </div>
-    
+
+      </div>
+
+      <div className="flex items-center justify-center">
+        <span className="flex text-lg text-gray-50">
+          ©
+          {currentYear}
+          {' '}
+          <Link to="/" className="ml-1 mr-1 hover:underline">Ecotreasures™.</Link>
+          {' '}
+          All Rights Reserved.
+        </span>
+      </div>
+
     </footer>
-  )
+  );
 }

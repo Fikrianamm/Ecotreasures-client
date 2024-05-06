@@ -1,34 +1,18 @@
-import { FaArrowRightLong } from "react-icons/fa6";
-import { ButtonLinkGreen } from "../component/buttons";
-import { NavigationHome } from "../component/navigations";
-import { CardJenisSampah, CardLayanan } from "../component/cards";
-import { Footer } from "../component/footer";
-
-const Home = () => {
-  return (
-    <main>
-      <NavigationHome />
-      <HeroSection />
-      <div className="min-h-dvh">
-      <LayananSection />
-      <JenisSampahSection />
-      </div>
-      <section className="mt-8">
-        <Footer />
-      </section>
-    </main>
-  );
-};
+import { FaArrowRightLong } from 'react-icons/fa6';
+import { NavigationHome } from '../component/navigations';
+import { CardJenisSampah, CardLayanan } from '../component/cards';
+import Footer from '../component/footer';
+import { Button } from '../component/buttons';
 
 export default Home;
 
-const HeroSection = () => {
+function HeroSection() {
   return (
     <header className="hero-img h-[455px] w-full bg-center bg-cover relative">
-      <div className="blur-background h-full backdrop-blur-sm w-full bg-slate-900 bg-opacity-25">
-        <article className="h-full flex flex-col justify-center items-center pt-16">
-          <div className="w-full h-full bg-gradient-to-b from-[rgba(0,0,0,0.3)] to-transparent absolute top-0"></div>
-          <h1 className="font-breeSerif text-gray-50 text-3xl mb-4 z-20">
+      <div className="w-full h-full bg-opacity-25 blur-background backdrop-blur-sm bg-slate-900">
+        <article className="flex flex-col items-center justify-center h-full pt-16">
+          <div className="w-full h-full bg-gradient-to-b from-[rgba(0,0,0,0.3)] to-transparent absolute top-0" />
+          <h1 className="z-20 mb-4 text-3xl font-breeSerif text-gray-50">
             EcoTreasures
           </h1>
           <p className="text-wrap text-xl text-gray-50 text-center max-w-[754px] mb-6 z-20">
@@ -37,23 +21,24 @@ const HeroSection = () => {
             Temukan kreativitas dalam sampah Anda dan
             berkontribusi untuk lingkungan yang lebih hijau!
           </p>
-          <ButtonLinkGreen
+          <Button
             title="Masuk ke Marketplace"
             href="/"
             className="z-20"
+            type="green"
           >
             Marketplace
             <FaArrowRightLong />
-          </ButtonLinkGreen>
+          </Button>
         </article>
       </div>
     </header>
   );
-};
+}
 
-const LayananSection = () => {
+function LayananSection() {
   return (
-    <section className="p-10 flex justify-center items-center flex-col space-y-6">
+    <section className="flex flex-col items-center justify-center p-10 space-y-6">
       <div className="flex flex-col items-center justify-center space-y-3">
         <h1 className="text-3xl font-bold font-redHatDisplay">Layanan</h1>
         <p>Revolusi daur ulang dari EcoTreasures untuk semua orang.</p>
@@ -74,53 +59,53 @@ const LayananSection = () => {
       </div>
     </section>
   );
-};
+}
 
-const JenisSampahSection = () => {
-const jenisSampahData = [
+function JenisSampahSection() {
+  const jenisSampahData = [
     {
-      href: "/",
-      src: "https://svgshare.com/i/12fJ.svg",
-      nama: "Kertas",
+      href: '/',
+      src: 'https://svgshare.com/i/12fJ.svg',
+      nama: 'Kertas',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12gh.svg",
-      nama: "Plastik",
+      href: '/',
+      src: 'https://svgshare.com/i/12gh.svg',
+      nama: 'Plastik',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12fK.svg",
-      nama: "Aluminium",
+      href: '/',
+      src: 'https://svgshare.com/i/12fK.svg',
+      nama: 'Aluminium',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12h1.svg",
-      nama: "Besi & Logam",
+      href: '/',
+      src: 'https://svgshare.com/i/12h1.svg',
+      nama: 'Besi & Logam',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12ez.svg",
-      nama: "Elektronik",
+      href: '/',
+      src: 'https://svgshare.com/i/12ez.svg',
+      nama: 'Elektronik',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12gJ.svg",
-      nama: "Botol",
+      href: '/',
+      src: 'https://svgshare.com/i/12gJ.svg',
+      nama: 'Botol',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12fc.svg",
-      nama: "Merek",
+      href: '/',
+      src: 'https://svgshare.com/i/12fc.svg',
+      nama: 'Merek',
     },
     {
-      href: "/",
-      src: "https://svgshare.com/i/12fo.svg",
-      nama: "Khusus",
+      href: '/',
+      src: 'https://svgshare.com/i/12fo.svg',
+      nama: 'Khusus',
     },
   ];
   return (
-    <section className="p-10 flex justify-center items-center flex-col space-y-6">
+    <section className="flex flex-col items-center justify-center p-10 space-y-6">
       <div className="flex flex-col items-center justify-center space-y-3">
         <h1 className="text-3xl font-bold font-redHatDisplay">Jenis Sampah</h1>
         <p>Lihat semua jenis sampah yang kami daur ulang.</p>
@@ -137,4 +122,20 @@ const jenisSampahData = [
       </div>
     </section>
   );
-};
+}
+
+function Home() {
+  return (
+    <main>
+      <NavigationHome />
+      <HeroSection />
+      <div className="min-h-dvh">
+        <LayananSection />
+        <JenisSampahSection />
+      </div>
+      <section className="mt-8">
+        <Footer />
+      </section>
+    </main>
+  );
+}
