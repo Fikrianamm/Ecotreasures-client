@@ -6,10 +6,11 @@ interface ButtonProps {
   className?: string
   title?: string
   type?: string
+  typebtn?: 'button' | 'submit'
 }
 
 export function Button({
-  href, children, className, title, type = 'green',
+  href, children, className, title, type = 'green', typebtn = 'button',
 }:ButtonProps) {
   let style;
   switch (type) {
@@ -40,7 +41,7 @@ export function Button({
   }
   return (
     <button
-      type="button"
+      type={typebtn || 'button'}
       title={title}
       className={`transition-all ${style} font-medium flex gap-2 items-center justify-center rounded-md px-4 py-2 ${className}`}
     >

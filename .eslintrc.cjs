@@ -37,5 +37,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'off',
+    'linebreak-style': 'off',
+    'react/button-has-type': 'off',
   },
 };

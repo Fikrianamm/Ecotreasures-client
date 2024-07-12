@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <main className="flex flex-col items-center justify-center min-h-dvh">
       <Logo type="green" className="mt-12 text-3xl" />
       <div className="flex-1">{children}</div>
-      <Footer />
+      <Footer type="light" />
     </main>
   );
 }
