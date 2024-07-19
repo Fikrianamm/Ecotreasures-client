@@ -2,8 +2,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../component/buttons';
 import { LOGIN_PAGE } from '../routes/routeConstant';
 import AuthLayout from '../component/layouts/authLayout';
+import useInput from '../hooks/useInput';
 
 export default function SignUp() {
+  const [nama, setNama] = useInput();
+  const [email, setEmail] = useInput();
+  const [password, setPassword] = useInput();
+
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('handlesignup');
@@ -17,19 +22,19 @@ export default function SignUp() {
           <div>
             <label htmlFor="name" className="flex flex-col gap-1">
               Nama
-              <input type="text" id="name" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan nama Anda" required />
+              <input type="text" id="name" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan nama Anda" value={nama} onChange={setNama} required />
             </label>
           </div>
           <div>
             <label htmlFor="email" className="flex flex-col gap-1">
               Email
-              <input type="email" id="email" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan email (contoh@gmail.com)" required />
+              <input type="email" id="email" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan email (contoh@gmail.com)" value={email} onChange={setEmail} required />
             </label>
           </div>
           <div>
             <label htmlFor="password" className="flex flex-col gap-1">
               Password
-              <input type="password" id="password" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan password" required />
+              <input type="password" id="password" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan password" value={password} onChange={setPassword} required />
             </label>
           </div>
           <Button typebtn="submit" title="Sign Up" className="mt-1">Sign Up</Button>

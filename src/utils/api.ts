@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from 'axios';
-import { IUserUpdate, IUserRegister, IUserLogin } from '../types/users';
-import IProduct from '../types/product';
-import IResponse from '../types/response';
+import {
+  IUserUpdate, IUserRegister, ICredentials, IProduct, IResponse,
+} from '../types/types';
 
 const baseUrl = 'http://localhost:8000';
 
@@ -67,7 +67,7 @@ async function updateUser(id:string, updateData:IUserUpdate) {
   }
 }
 
-async function login(loginData:IUserLogin) {
+async function login(loginData:ICredentials) {
   try {
     const response:AxiosResponse<IResponse> = await axios.post(`${baseUrl}/api/auth/login`, loginData);
     const { message, success, data }:IResponse = response.data;
