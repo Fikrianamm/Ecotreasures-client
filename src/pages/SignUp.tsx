@@ -1,17 +1,38 @@
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Button } from '../component/buttons';
 import { LOGIN_PAGE } from '../routes/routeConstant';
 import AuthLayout from '../component/layouts/authLayout';
 import useInput from '../hooks/useInput';
+import useAuth from '../store/useAuth';
 
 export default function SignUp() {
-  const [nama, setNama] = useInput();
+  const navigate = useNavigate();
+  const [name, setName] = useInput();
   const [email, setEmail] = useInput();
   const [password, setPassword] = useInput();
+  const { loading, register } = useAuth();
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const registerData = {
+    name,
+    email,
+    password,
+  };
+
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('handlesignup');
+    if (loading === false) {
+      console.log('handlesignup');
+      try {
+        const { success } = await register(registerData);
+        if (success) {
+          navigate(LOGIN_PAGE);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -22,7 +43,7 @@ export default function SignUp() {
           <div>
             <label htmlFor="name" className="flex flex-col gap-1">
               Nama
-              <input type="text" id="name" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan nama Anda" value={nama} onChange={setNama} required />
+              <input type="text" id="name" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan nama Anda" value={name} onChange={setName} required />
             </label>
           </div>
           <div>
@@ -37,7 +58,10 @@ export default function SignUp() {
               <input type="password" id="password" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan password" value={password} onChange={setPassword} required />
             </label>
           </div>
-          <Button typebtn="submit" title="Sign Up" className="mt-1">Sign Up</Button>
+          <Button typebtn="submit" title="Sign Up" className="mt-1">
+            {loading && (<AiOutlineLoading3Quarters className="animate-spin" />)}
+            {loading ? 'Processing...' : 'Sign Up'}
+          </Button>
 
         </form>
         <div>

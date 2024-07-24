@@ -1,12 +1,35 @@
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { Button } from '../component/buttons';
 import AuthLayout from '../component/layouts/authLayout';
-import { SIGNUP_PAGE } from '../routes/routeConstant';
+import { MARKETPLACE, SIGNUP_PAGE } from '../routes/routeConstant';
+import useInput from '../hooks/useInput';
+import useAuth from '../store/useAuth';
 
 export default function Login() {
-  const handleLogin = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useInput();
+  const [password, setPassword] = useInput();
+  const { loading, login } = useAuth();
+
+  const credentials = {
+    email,
+    password,
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('handlesignup');
+    if (loading === false) {
+      try {
+        const { success } = await login(credentials);
+        if (success) {
+          navigate(MARKETPLACE);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   return (
     <AuthLayout>
@@ -16,16 +39,19 @@ export default function Login() {
           <div>
             <label htmlFor="email" className="flex flex-col gap-1">
               Email
-              <input type="email" id="email" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan email (contoh@gmail.com)" required />
+              <input type="email" id="email" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan email (contoh@gmail.com)" value={email} onChange={setEmail} required />
             </label>
           </div>
           <div>
             <label htmlFor="password" className="flex flex-col gap-1">
               Password
-              <input type="password" id="password" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan password" required />
+              <input type="password" id="password" className="px-2 py-1 border rounded outline-green-600 border-slate-400" placeholder="Masukkan password" value={password} onChange={setPassword} required />
             </label>
           </div>
-          <Button typebtn="submit" title="Sign Up" className="mt-1">Sign Up</Button>
+          <Button typebtn="submit" title="Sign Up" className="mt-1">
+            {loading && (<AiOutlineLoading3Quarters className="animate-spin" />)}
+            {loading ? 'Processing...' : 'Login'}
+          </Button>
 
         </form>
         <div>

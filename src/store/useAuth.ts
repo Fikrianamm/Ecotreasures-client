@@ -1,17 +1,20 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import {
-  ICredentials, IUserRegister, IUserUpdate,
+  IAuthStore,
+  ICredentials,
+  IUserRegister,
+  IUserUpdate,
 } from '../types/types';
 import {
   getErrorMessage, login, register, updateUser,
 } from '../utils/api';
 
-const appStore = (set) => ({
+const useAuth = create(persist((set) => ({
   user: null,
   loading: false,
   accessToken: null,
-  login: async (credentials : ICredentials) => {
+  login: async (credentials: ICredentials) => {
     try {
       set(() => ({ loading: true }));
       const { success, message } = await login(credentials);
@@ -48,7 +51,7 @@ const appStore = (set) => ({
       set(() => ({ loading: false }));
     }
   },
-  updateUser: async (id:string, updateData:IUserUpdate) => {
+  updateUser: async (id: string, updateData: IUserUpdate) => {
     try {
       set(() => ({ loading: true }));
       const { success, message } = await updateUser(id, updateData);
@@ -63,8 +66,9 @@ const appStore = (set) => ({
       set(() => ({ loading: false }));
     }
   },
-});
+}), {
+  name: 'auth',
+  partialize: (state : IAuthStore) => ({ user: state.user, accessToken: state.accessToken }),
+}));
 
-const userAuthStore = create(persist(appStore, { name: 'auth' }));
-
-export default userAuthStore;
+export default useAuth;
