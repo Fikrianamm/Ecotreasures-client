@@ -36,7 +36,7 @@ interface ICredentials {
 interface IResponse {
   message: string
   success: boolean
-  data?: any
+  token?: string
 }
 
 interface IAuthStore {

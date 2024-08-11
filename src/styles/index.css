@@ -20,6 +20,9 @@
     .btn-transparentGrey{
         @apply text-slate-500 bg-transparent hover:bg-green-50 border border-slate-400
     }
+    .input{
+        @apply px-2 py-1 border rounded outline-green-600 border-slate-400
+    }
 }
 
 h1,

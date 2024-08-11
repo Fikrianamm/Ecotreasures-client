@@ -39,5 +39,7 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'linebreak-style': 'off',
     'react/button-has-type': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'no-console': 'off',
   },
 };

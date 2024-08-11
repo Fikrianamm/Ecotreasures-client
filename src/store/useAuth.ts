@@ -17,10 +17,11 @@ const useAuth = create(persist((set) => ({
   login: async (credentials: ICredentials) => {
     try {
       set(() => ({ loading: true }));
-      const { success, message } = await login(credentials);
+      const { success, message, token } = await login(credentials);
       if (!success) {
         throw new Error(message);
       }
+      set(() => ({ accessToken: token }));
       return { message: 'Login Successful', success: true };
     } catch (error) {
       const message = getErrorMessage(error);
@@ -70,5 +71,8 @@ const useAuth = create(persist((set) => ({
   name: 'auth',
   partialize: (state : IAuthStore) => ({ user: state.user, accessToken: state.accessToken }),
 }));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const unsub = useAuth.subscribe(console.log);
 
 export default useAuth;

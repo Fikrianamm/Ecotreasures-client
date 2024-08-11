@@ -42,9 +42,9 @@ function fetchWithToken(method:'get' | 'post' | 'delete', url?:string, data:any 
 async function register(registerData: IUserRegister) {
   try {
     const response:AxiosResponse<IResponse> = await axios.post(`${baseUrl}/api/user/register`, registerData);
-    const { message, success, data } = response.data;
+    const { message, success } = response.data;
     if (success) {
-      return { message, success, data };
+      return { message, success };
     }
     throw new Error(message);
   } catch (error) {
@@ -70,9 +70,9 @@ async function updateUser(id:string, updateData:IUserUpdate) {
 async function login(loginData:ICredentials) {
   try {
     const response:AxiosResponse<IResponse> = await axios.post(`${baseUrl}/api/auth/login`, loginData);
-    const { message, success, data }:IResponse = response.data;
+    const { message, success, token }:IResponse = response.data;
     if (success) {
-      return { message, success, data };
+      return { message, success, token };
     }
     throw new Error(message);
   } catch (error) {
@@ -84,9 +84,9 @@ async function login(loginData:ICredentials) {
 async function getAuthUser() {
   try {
     const response:AxiosResponse<IResponse> = await fetchWithToken('get', '/api/auth/me');
-    const { message, success, data } = response.data;
+    const { message, success } = response.data;
     if (success) {
-      return { message, success, data };
+      return { message, success };
     }
     throw new Error(message);
   } catch (error) {
@@ -154,9 +154,9 @@ async function deleteProduct(id:string) {
 async function getAllProducts() {
   try {
     const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/product/data`);
-    const { message, success, data } = response.data;
+    const { message, success } = response.data;
     if (success) {
-      return { message, success, data };
+      return { message, success };
     }
     throw new Error(message);
   } catch (error) {
@@ -168,9 +168,9 @@ async function getAllProducts() {
 // async function getSellerProducts() {
 //   try {
 //     const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/product/data`);
-//     const { message, success, data } = response.data;
+//     const { message, success } = response.data;
 //     if (success) {
-//       return { message, success, data };
+//       return { message, success };
 //     }
 //     throw new Error(message);
 //   } catch (error) {
@@ -181,9 +181,9 @@ async function getAllProducts() {
 // async function createReview() {
 //   try {
 //     const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/product/data`);
-//     const { message, success, data } = response.data;
+//     const { message, success } = response.data;
 //     if (success) {
-//       return { message, success, data };
+//       return { message, success };
 //     }
 //     throw new Error(message);
 //   } catch (error) {
@@ -195,9 +195,9 @@ async function getAllProducts() {
 // async function getProductReviews() {
 //   try {
 //     const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/product/data`);
-//     const { message, success, data } = response.data;
+//     const { message, success } = response.data;
 //     if (success) {
-//       return { message, success, data };
+//       return { message, success };
 //     }
 //     throw new Error(message);
 //   } catch (error) {
@@ -223,9 +223,9 @@ async function createWishlist(id:string) {
 async function getWishlist() {
   try {
     const response:AxiosResponse<IResponse> = await fetchWithToken('get', '/api/wishlist/show');
-    const { message, success, data } = response.data;
+    const { message, success } = response.data;
     if (success) {
-      return { message, success, data };
+      return { message, success };
     }
     throw new Error(message);
   } catch (error) {
