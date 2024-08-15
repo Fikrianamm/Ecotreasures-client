@@ -7,7 +7,7 @@ import useAuth from '../../store/useAuth';
 import { ICredentials } from '../../types/types';
 import { MARKETPLACE } from '../../routes/routeConstant';
 import { validationLoginSchema } from '../../validation/validation';
-import { Button } from '../buttons';
+import { Button } from '../Buttons';
 
 export default function LoginForm() {
   const navigate = useNavigate();

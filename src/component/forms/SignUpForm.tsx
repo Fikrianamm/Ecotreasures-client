@@ -4,7 +4,7 @@ import {
 } from 'formik';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import useAuth from '../../store/useAuth';
-import { Button } from '../buttons';
+import { Button } from '../Buttons';
 import { IUserRegister } from '../../types/types';
 import { LOGIN_PAGE } from '../../routes/routeConstant';
 import { validationSignUpSchema } from '../../validation/validation';
