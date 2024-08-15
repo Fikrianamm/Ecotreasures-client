@@ -11,6 +11,9 @@
 }
 
 @layer components{
+    .btn{
+        @apply transition-all font-medium flex gap-2 items-center justify-center rounded-md px-4 py-2 text-center
+    }
     .btn-green{
         @apply text-gray-50 bg-green-700 hover:bg-green-800
     }

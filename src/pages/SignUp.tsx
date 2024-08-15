@@ -1,5 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
-import { Button } from '../component/buttons';
+import { Button } from '../component/Buttons';
 import { LOGIN_PAGE } from '../routes/routeConstant';
 import AuthLayout from '../component/layouts/authLayout';
 import SignUpForm from '../component/forms/SignUpForm';

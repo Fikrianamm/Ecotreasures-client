@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import Footer from '../footer';
-import Logo from '../logo';
+import Footer from '../Footer';
+import Logo from '../Logo';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (

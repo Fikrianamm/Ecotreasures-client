@@ -1,8 +1,8 @@
 import { FaArrowRightLong } from 'react-icons/fa6';
-import { NavigationHome } from '../component/navigations';
-import { CardJenisSampah, CardLayanan } from '../component/cards';
-import Footer from '../component/footer';
-import { Button } from '../component/buttons';
+import { NavigationHome } from '../component/Navigations';
+import { CardJenisSampah, CardLayanan } from '../component/Cards';
+import Footer from '../component/Footer';
+import { Button } from '../component/Buttons';
 
 export default Home;
 

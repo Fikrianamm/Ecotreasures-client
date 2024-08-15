@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from './logo';
+import Logo from './Logo';
 
 export default function Footer({ type }:{ type?: 'dark' | 'light' }) {
   const currentYear = new Date().getFullYear();
@@ -39,7 +39,7 @@ export default function Footer({ type }:{ type?: 'dark' | 'light' }) {
   }
   return (
     <footer className="w-full h-32 pt-5 pb-5 pl-10 pr-10 space-y-6 bg-slate-800">
-      <div className="flex border-0 pb-2 border-gray-300 solid border-b-[1px]">
+      <div className="flex border-0 pb-2 border-gray-400 solid border-b-[1px]">
 
         <div className="flex-1">
           <Logo type="white" />
