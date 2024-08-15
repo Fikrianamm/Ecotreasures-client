@@ -163,7 +163,7 @@ export function NavigationMarketplace() {
   };
   return (
     <nav
-      className="sticky top-0 z-20 flex items-center justify-between w-full h-16 px-8"
+      className="sticky top-0 z-20 flex items-center justify-between w-full h-16 px-8 bg-white shadow"
     >
       <div className="flex gap-6">
         <Button typebtn="button" type="transparentWhite" className="p-0 border-none text-slate-700 hover:text-green-600">

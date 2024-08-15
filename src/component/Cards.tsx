@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { Rating } from './StarRating';
+import formatRupiah from '../utils/currency';
 
 interface ICardJenisSampah {
   src: string,
@@ -11,6 +13,15 @@ interface ICardLayanan {
   nama: string,
   href: string,
   desk: string
+}
+
+interface CardProductProps {
+  title: string
+  price: number
+  discountPersent?: number
+  shop: string
+  rating: number
+  reviews: number
 }
 
 export function CardJenisSampah({ src, nama, href } : ICardJenisSampah) {
@@ -44,6 +55,44 @@ export function CardLayanan({
         </div>
         <p className="text-slate-600">{desk}</p>
       </article>
+    </Link>
+  );
+}
+
+export function CardProduct({
+  title, price, discountPersent, shop, rating = 0, reviews = 0,
+}: CardProductProps) {
+  let afterDiscount: number | null = null;
+  if (discountPersent) {
+    const discount = price * (discountPersent / 100);
+    afterDiscount = price - discount;
+  }
+
+  return (
+    <Link to={`/marketplace/${shop}/${title}`} className="border rounded-md border-slate-300">
+      <img src="https://placehold.co/600x400/png" alt="imageproduct" className="rounded-t-md" />
+      <div className="p-4">
+        <h5>{title}</h5>
+        <p className="font-medium">{discountPersent ? formatRupiah(afterDiscount as number) : formatRupiah(price)}</p>
+        {discountPersent && (
+        <p className="flex items-center gap-2 text-xs text-slate-500">
+          <s>{formatRupiah(price)}</s>
+          <span className="text-red-600">
+            {discountPersent}
+            %
+          </span>
+        </p>
+        ) }
+        <p className="text-slate-500">{shop}</p>
+        <div className="flex items-center gap-2">
+          <Rating size={12} rated={rating} />
+          <p className="font-light text-slate-500">
+            (
+            {reviews}
+            )
+          </p>
+        </div>
+      </div>
     </Link>
   );
 }

@@ -18,10 +18,11 @@ export default function Breadcrumb() {
     .filter((crumb) => crumb !== '')
     .map((crumb, index, array) => {
       const path = `/${array.slice(0, index + 1).join('/')}`;
+      const isLast = index === array.length - 1;
 
       return (
         <>
-          <Link key={path} to={path} className="text-slate-500 hover:text-green-600">{capitalize(decodeURIComponent(crumb))}</Link>
+          <Link key={path} to={path} className={` hover:text-green-600 ${isLast ? 'text-green-600' : 'text-slate-500'}`}>{capitalize(decodeURIComponent(crumb))}</Link>
           {index < array.length - 1 && <span className="text-slate-500"><IoIosArrowForward /></span>}
         </>
       );
