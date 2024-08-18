@@ -1,6 +1,6 @@
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../component/Buttons';
-import AuthLayout from '../component/layouts/authLayout';
+import AuthLayout from '../component/layouts/AuthLayout';
 import LoginForm from '../component/forms/LoginForm';
 import { SIGNUP_PAGE } from '../routes/routeConstant';
 

@@ -16,6 +16,7 @@ interface ICardLayanan {
 }
 
 interface CardProductProps {
+  image: string
   title: string
   price: number
   discountPersent?: number
@@ -60,7 +61,7 @@ export function CardLayanan({
 }
 
 export function CardProduct({
-  title, price, discountPersent, shop, rating = 0, reviews = 0,
+  image = 'https://placehold.co/600x400/png', title, price, discountPersent, shop, rating = 0, reviews = 0,
 }: CardProductProps) {
   let afterDiscount: number | null = null;
   if (discountPersent) {
@@ -70,7 +71,7 @@ export function CardProduct({
 
   return (
     <Link to={`/marketplace/${shop}/${title}`} className="border rounded-md border-slate-300">
-      <img src="https://placehold.co/600x400/png" alt="imageproduct" className="rounded-t-md" />
+      <img src={image} alt={title} className="object-contain h-40 rounded-t-md w-60" />
       <div className="p-4">
         <h5>{title}</h5>
         <p className="font-medium">{discountPersent ? formatRupiah(afterDiscount as number) : formatRupiah(price)}</p>

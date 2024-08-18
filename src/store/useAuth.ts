@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import Cookies from 'js-cookie';
 import {
-  IAuthStore,
   ICredentials,
   IUserRegister,
   IUserUpdate,
@@ -10,7 +9,7 @@ import {
   getErrorMessage, login, register, updateUser,
 } from '../utils/api';
 
-const useAuth = create(persist((set) => ({
+const useAuth = create((set) => ({
   user: null,
   loading: false,
   accessToken: null,
@@ -18,10 +17,13 @@ const useAuth = create(persist((set) => ({
     try {
       set(() => ({ loading: true }));
       const { success, message, token } = await login(credentials);
+      console.log(`response fetch useAuth ${{ success, message, token }}`);
+
       if (!success) {
         throw new Error(message);
       }
       set(() => ({ accessToken: token }));
+      Cookies.set('token', token, { expires: 2 });
       return { message: 'Login Successful', success: true };
     } catch (error) {
       const message = getErrorMessage(error);
@@ -35,6 +37,7 @@ const useAuth = create(persist((set) => ({
       user: null,
       accessToken: null,
     }));
+    Cookies.remove('token');
     return { message: 'Logout Successful', success: true };
   },
   register: async (registerData: IUserRegister) => {
@@ -67,9 +70,6 @@ const useAuth = create(persist((set) => ({
       set(() => ({ loading: false }));
     }
   },
-}), {
-  name: 'auth',
-  partialize: (state : IAuthStore) => ({ user: state.user, accessToken: state.accessToken }),
 }));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

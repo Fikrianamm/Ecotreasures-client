@@ -3,6 +3,7 @@ import { NavigationHome } from '../component/Navigations';
 import { CardJenisSampah, CardLayanan } from '../component/Cards';
 import Footer from '../component/Footer';
 import { Button } from '../component/Buttons';
+import { getAccessToken } from '../utils/api';
 
 export default Home;
 
@@ -125,6 +126,8 @@ function JenisSampahSection() {
 }
 
 function Home() {
+  console.log(getAccessToken());
+
   return (
     <main>
       <NavigationHome />

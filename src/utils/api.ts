@@ -70,9 +70,10 @@ async function updateUser(id:string, updateData:IUserUpdate) {
 async function login(loginData:ICredentials) {
   try {
     const response:AxiosResponse<IResponse> = await axios.post(`${baseUrl}/api/auth/login`, loginData);
-    const { message, success, token }:IResponse = response.data;
+    const { message, success, data }:IResponse = response.data;
+    console.log(`response fetch loginApi ${{ success, message, token: data.token }}`);
     if (success) {
-      return { message, success, token };
+      return { message, success, token: data.token };
     }
     throw new Error(message);
   } catch (error) {
