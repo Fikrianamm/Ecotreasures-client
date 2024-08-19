@@ -21,10 +21,10 @@ export default function Breadcrumb() {
       const isLast = index === array.length - 1;
 
       return (
-        <>
-          <Link key={path} to={path} className={` hover:text-green-600 ${isLast ? 'text-green-600' : 'text-slate-500'}`}>{capitalize(decodeURIComponent(crumb))}</Link>
+        <span key={path}>
+          <Link to={path} className={` hover:text-green-600 ${isLast ? 'text-green-600' : 'text-slate-500'}`}>{capitalize(decodeURIComponent(crumb))}</Link>
           {index < array.length - 1 && <span className="text-slate-500"><IoIosArrowForward /></span>}
-        </>
+        </span>
       );
     });
 

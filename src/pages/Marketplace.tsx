@@ -1,17 +1,25 @@
+import { useEffect } from 'react';
 import { CardProduct } from '../component/Cards';
 import MarketplaceLayout from '../component/layouts/MarketplaceLayout';
+import useProducts from '../store/useProducts';
+import MarketplaceSkeleton from '../component/skeleton/MarketplaceSkeleton';
 
 export default function Marketplace() {
+  const { fetchProduct, products, loading } = useProducts();
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
+
   return (
     <MarketplaceLayout>
-      <div className="grid grid-cols-5 gap-4 mt-6">
-        <CardProduct image="https://placehold.co/800@3x.png" title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-        <CardProduct image="https://placehold.co/800@3x.png" title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-        <CardProduct image="https://placehold.co/600x400@2x.png" title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-        <CardProduct image="https://placehold.co/600x400@2x.png" title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-        <CardProduct image="https://placehold.co/800@3x.png" title="Title Product" price={108000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-        <CardProduct image="https://placehold.co/600x400@2x.png" title="Title Product" price={108000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-      </div>
+      {loading ? <MarketplaceSkeleton /> : (
+        <div className="grid grid-cols-5 gap-4 mt-6">
+          {products?.map((product) => (
+            <CardProduct image="https://placehold.co/600x400@2x.png" title={product.title} price={product.price} key={product.id} />
+          ))}
+        </div>
+      )}
     </MarketplaceLayout>
   );
 }

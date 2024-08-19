@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from 'typescript-cookie';
@@ -140,10 +141,10 @@ async function deleteProduct(id:string) {
 
 async function getAllProducts() {
   try {
-    const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/product/data`);
-    const { message, success } = response.data;
+    const response:AxiosResponse<IResponse> = await axios.get(`${baseUrl}/api/products/data`);
+    const { message, success, product_data } = response.data;
     if (success) {
-      return { message, success };
+      return { message, success, products: product_data };
     }
     throw new Error(message);
   } catch (error) {

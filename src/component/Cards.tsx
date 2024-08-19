@@ -20,9 +20,9 @@ interface CardProductProps {
   title: string
   price: number
   discountPersent?: number
-  shop: string
-  rating: number
-  reviews: number
+  shop?: string
+  rating?: number
+  reviews?: number
 }
 
 export function CardJenisSampah({ src, nama, href } : ICardJenisSampah) {
@@ -61,7 +61,7 @@ export function CardLayanan({
 }
 
 export function CardProduct({
-  image = 'https://placehold.co/600x400/png', title, price, discountPersent, shop, rating = 0, reviews = 0,
+  image = 'https://placehold.co/600x400/png', title, price, discountPersent, shop = 'Nama toko', rating = 0, reviews = 0,
 }: CardProductProps) {
   let afterDiscount: number | null = null;
   if (discountPersent) {

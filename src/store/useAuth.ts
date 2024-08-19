@@ -128,6 +128,6 @@ const useAuth: UseBoundStore<StoreApi<IAuthStore>> = create(persist((set) => ({
 }));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const unsub = useAuth.subscribe(console.log);
+// const unsub = useAuth.subscribe(console.log);
 
 export default useAuth;

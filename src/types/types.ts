@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface IProduct {
+  id:number
   title:string
-  image:string
+  thumbnail:string
   price:number
   stock:number
   detail:string
@@ -37,6 +38,7 @@ interface IResponse {
   message: string
   success: boolean
   data?: any
+  product_data?: IProduct[]
 }
 
 interface IAuthStore {
@@ -47,7 +49,13 @@ interface IAuthStore {
   logout: () => void
   register: (registerData: IUserRegister) => Promise<IResponse>
   updateUser: (id:string, updateData:IUserUpdate) => Promise<IResponse>
-  preload: () => void
+  preload: () => Promise<IResponse>
+}
+
+interface IProductStore {
+  products: IProduct[] | null
+  loading: boolean
+  fetchProduct: () => Promise<IResponse>
 }
 
 export type {
@@ -57,5 +65,6 @@ export type {
   ICredentials,
   IResponse,
   IAuthStore,
+  IProductStore,
   IUser,
 };
