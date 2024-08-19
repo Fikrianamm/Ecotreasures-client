@@ -5,7 +5,7 @@ import {
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import useAuth from '../../store/useAuth';
 import { ICredentials } from '../../types/types';
-import { MARKETPLACE } from '../../routes/routeConstant';
+import { HOME_PAGE } from '../../routes/routeConstant';
 import { validationLoginSchema } from '../../validation/validation';
 import { Button } from '../Buttons';
 
@@ -27,7 +27,7 @@ export default function LoginForm() {
       try {
         const { success } = await login(credentials);
         if (success) {
-          navigate(MARKETPLACE);
+          navigate(HOME_PAGE);
         }
       } catch (error) {
         console.error(error);

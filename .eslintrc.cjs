@@ -41,6 +41,7 @@ module.exports = {
     'react/button-has-type': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': 'off',
+    'import/no-cycle': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
   },
 };

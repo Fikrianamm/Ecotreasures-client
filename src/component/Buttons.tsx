@@ -5,13 +5,14 @@ interface ButtonProps {
   children: React.ReactNode
   className?: string
   title?: string
-  type?:'green' | 'transparentWhite' | 'transparentGrey'
+  type?:'green' | 'transparentWhite' | 'transparentGrey' | 'transparentRed'
   typebtn?: 'button' | 'submit'
+  onClick?: () => void
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export function Button({
-  href, children, className, title, type = 'green', typebtn = 'button',
+  href, children, className, title, type = 'green', typebtn = 'button', onClick,
 }:ButtonProps) {
   let style;
   switch (type) {
@@ -23,6 +24,9 @@ export function Button({
       break;
     case 'transparentGrey':
       style = 'btn-transparentGrey';
+      break;
+    case 'transparentRed':
+      style = 'btn-transparentRed';
       break;
     default:
       style = 'btn-green';
@@ -45,6 +49,7 @@ export function Button({
       type={typebtn || 'button'}
       title={title}
       className={`btn ${style} ${className}`}
+      onClick={onClick}
     >
       {children}
     </button>

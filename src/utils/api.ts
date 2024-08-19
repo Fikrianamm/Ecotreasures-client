@@ -1,33 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from 'axios';
+import { getCookie } from 'typescript-cookie';
 import {
   IUserUpdate, IUserRegister, ICredentials, IProduct, IResponse,
 } from '../types/types';
+import getErrorMessage from './error';
 
 const baseUrl = 'http://localhost:8000';
 
-export const getErrorMessage = (error: unknown): string => {
-  let message;
-  if (error instanceof Error) {
-    message = error.message;
-  } else if (error && typeof error === 'object' && 'message' in error) {
-    message = String(error.message);
-  } else if (typeof error === 'string') {
-    message = error;
-  } else {
-    message = 'Something went wrong';
-  }
-
-  return message;
-};
-
-function putAccessToken(token:string) {
-  localStorage.setItem('token', token);
-}
-
 function getAccessToken() {
-  return localStorage.getItem('token');
+  const token = JSON.parse(getCookie('auth') as string);
+  return token.state.accessToken as string;
 }
+
 function fetchWithToken(method:'get' | 'post' | 'delete', url?:string, data:any = {}) {
   return axios({
     method,
@@ -71,7 +56,6 @@ async function login(loginData:ICredentials) {
   try {
     const response:AxiosResponse<IResponse> = await axios.post(`${baseUrl}/api/auth/login`, loginData);
     const { message, success, data }:IResponse = response.data;
-    console.log(`response fetch loginApi ${{ success, message, token: data.token }}`);
     if (success) {
       return { message, success, token: data.token };
     }
@@ -84,12 +68,14 @@ async function login(loginData:ICredentials) {
 
 async function getAuthUser() {
   try {
-    const response:AxiosResponse<IResponse> = await fetchWithToken('get', '/api/auth/me');
-    const { message, success } = response.data;
-    if (success) {
-      return { message, success };
-    }
-    throw new Error(message);
+    // const response:AxiosResponse<IResponse> = await fetchWithToken('get', '/api/auth/me');
+    const response = await fetchWithToken('get', '/api/auth/me');
+    // const { message, success } = response.data;
+    // if (success) {
+    //   return { message, success };
+    // }
+    // throw new Error(message);
+    return response.data;
   } catch (error) {
     const message = getErrorMessage(error);
     return { message, success: false };
@@ -250,7 +236,6 @@ async function deleteWishlist(id:string) {
 }
 
 export {
-  putAccessToken,
   getAccessToken,
   register,
   updateUser,

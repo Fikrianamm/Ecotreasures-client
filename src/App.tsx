@@ -1,20 +1,28 @@
-import { Route, Routes } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
+import { Slide, ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
 import {
-  HOME_PAGE, LOGIN_PAGE, MARKETPLACE, SIGNUP_PAGE,
+  routes,
 } from './routes/routeConstant';
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
-import Marketplace from './pages/Marketplace';
+import 'react-toastify/dist/ReactToastify.css';
+import useAuth from './store/useAuth';
 
 function App() {
+  const { preload, user } = useAuth();
+
+  useEffect(() => {
+    if (!user?.name) {
+      console.log('preload');
+
+      preload();
+    }
+  }, [preload, user]);
+
   return (
-    <Routes>
-      <Route path={HOME_PAGE} Component={Home} />
-      <Route path={SIGNUP_PAGE} Component={SignUp} />
-      <Route path={LOGIN_PAGE} Component={Login} />
-      <Route path={MARKETPLACE} Component={Marketplace} />
-    </Routes>
+    <>
+      <ToastContainer transition={Slide} hideProgressBar />
+      <RouterProvider router={routes} />
+    </>
   );
 }
 

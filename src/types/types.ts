@@ -47,6 +47,7 @@ interface IAuthStore {
   logout: () => void
   register: (registerData: IUserRegister) => Promise<IResponse>
   updateUser: (id:string, updateData:IUserUpdate) => Promise<IResponse>
+  preload: () => void
 }
 
 export type {
@@ -56,4 +57,5 @@ export type {
   ICredentials,
   IResponse,
   IAuthStore,
+  IUser,
 };
