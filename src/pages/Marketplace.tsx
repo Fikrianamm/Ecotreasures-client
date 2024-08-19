@@ -1,26 +1,25 @@
-import Breadcrumb from '../component/Breadcrumb';
+import { useEffect } from 'react';
 import { CardProduct } from '../component/Cards';
-import { Navigation, NavigationMarketplace } from '../component/Navigations';
+import MarketplaceLayout from '../component/layouts/MarketplaceLayout';
+import useProducts from '../store/useProducts';
+import MarketplaceSkeleton from '../component/skeleton/MarketplaceSkeleton';
 
 export default function Marketplace() {
+  const { fetchProduct, products, loading } = useProducts();
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
+
   return (
-    <div className="w-full min-h-dvh">
-      <Navigation />
-      <NavigationMarketplace />
-      <div className="max-w-screen-xl mx-auto my-7">
-        <Breadcrumb />
+    <MarketplaceLayout>
+      {loading ? <MarketplaceSkeleton /> : (
         <div className="grid grid-cols-5 gap-4 mt-6">
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
-          <CardProduct title="Title Product" price={100000} discountPersent={10} rating={3} reviews={5} shop="Name Shop" />
+          {products?.map((product) => (
+            <CardProduct image="https://placehold.co/600x400@2x.png" title={product.title} price={product.price} key={product.id} />
+          ))}
         </div>
-      </div>
-    </div>
+      )}
+    </MarketplaceLayout>
   );
 }

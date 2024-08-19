@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 import { IoNotifications, IoSearch } from 'react-icons/io5';
 import { FaCartShopping, FaShop } from 'react-icons/fa6';
+import { MdOutlineLogout, MdOutlineManageAccounts } from 'react-icons/md';
 import Logo from './Logo';
 import { Button } from './Buttons';
 import {
-  KERANJANG, PEMBELIAN, SIGNUP_PAGE, TOKO, WISHLIST,
+  KERANJANG, MARKETPLACE, PEMBELIAN, SETTING, SIGNUP_PAGE, TOKO, WISHLIST,
 } from '../routes/routeConstant';
 import { validationSearchSchema } from '../validation/validation';
+import useAuth from '../store/useAuth';
 
 interface Dropdown {
   className: string
@@ -28,6 +30,8 @@ export function DropdownLayanan({ className } : Dropdown) {
 
 export function Navigation() {
   const [drop, setDrop] = useState<string>('hidden');
+  const { user, logout } = useAuth();
+  const [showOptions, setShowOptions] = useState<boolean>(false);
 
   function onDrop() {
     if (drop === 'hidden') {
@@ -35,6 +39,10 @@ export function Navigation() {
     } else {
       setDrop('hidden');
     }
+  }
+
+  function onShowOptions() {
+    setShowOptions((curr) => !curr);
   }
 
   return (
@@ -62,10 +70,36 @@ export function Navigation() {
               <DropdownLayanan className={drop} />
             </button>
           </li>
-          <li className="flex space-x-1">
-            <Button href="/login" type="transparentGrey">Log In</Button>
-            <Button href={SIGNUP_PAGE} type="green">Sign Up</Button>
-          </li>
+          {user?.name ? (
+            <div className="relative">
+              <button type="button" onClick={onShowOptions}>
+                <img src={user?.image as string} alt={user?.name} className="object-cover w-10 h-10 rounded-full" />
+                {showOptions ? <IoIosArrowUp className="absolute bottom-0 right-0 p-[2px] rounded-full bg-slate-200 text-slate-900" size={15} /> : <IoIosArrowDown className="absolute bottom-0 right-0 p-[2px] rounded-full bg-slate-200 text-slate-900" size={15} />}
+              </button>
+              {showOptions && (
+                <div className="absolute right-0 z-50 flex flex-col items-center justify-center p-6 bg-white border rounded-md shadow-lg border-slate-200 top-16 text-slate-800">
+                  <img src={user?.image as string} alt={user?.name} className="object-cover w-20 h-20 rounded-full" />
+                  <p className="mt-2 font-medium">{user?.name}</p>
+                  <p className="mb-4 text-slate-500">{user?.email}</p>
+                  <div className="flex flex-col w-full gap-2">
+                    <Button className="justify-between w-full" typebtn="button" type="transparentGrey" title="Pengaturan akun" href={SETTING}>
+                      Pengaturan akun
+                      <MdOutlineManageAccounts />
+                    </Button>
+                    <Button className="justify-between w-full" typebtn="button" type="transparentRed" title="Logout" onClick={logout}>
+                      Logout
+                      <MdOutlineLogout />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <li className="flex space-x-1">
+              <Button href="/login" type="transparentGrey">Log In</Button>
+              <Button href={SIGNUP_PAGE} type="green">Sign Up</Button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
@@ -74,6 +108,9 @@ export function Navigation() {
 
 export function NavigationHome() {
   const [scroll, setScroll] = useState<boolean>(false);
+  const { user, logout } = useAuth();
+  const [drop, setDrop] = useState<string>('hidden');
+  const [showOptions, setShowOptions] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,8 +127,6 @@ export function NavigationHome() {
     };
   }, []);
 
-  const [drop, setDrop] = useState<string>('hidden');
-
   function onDrop() {
     if (drop === 'hidden') {
       setDrop('absolute');
@@ -100,10 +135,14 @@ export function NavigationHome() {
     }
   }
 
+  function onShowOptions() {
+    setShowOptions((curr) => !curr);
+  }
+
   return (
     <nav
       id="nav-main"
-      className={` px-8 fixed top-0 flex items-center w-full h-16 z-20  ${
+      className={`px-8 fixed top-0 flex items-center w-full h-16 z-20  ${
         scroll
           ? 'bg-white bg-opacity-50 backdrop-blur-sm border-b-[0.5px] transition-all border-gray-200'
           : ''
@@ -125,7 +164,7 @@ export function NavigationHome() {
             scroll ? 'text-slate-800' : 'text-gray-50'
           } items-center`}
         >
-          <Link to="/">
+          <Link to={MARKETPLACE}>
             <li className="hov-b">Marketplace</li>
           </Link>
           <button type="button" onClick={onDrop}>
@@ -136,20 +175,46 @@ export function NavigationHome() {
             </li>
             <DropdownLayanan className={drop} />
           </button>
-          <li className="flex space-x-1">
-            {scroll ? (
-              <Button href="/login" type="transparentGrey">
-                Log In
+          {user?.name ? (
+            <div className="relative">
+              <button type="button" onClick={onShowOptions}>
+                <img src={user?.image as string} alt={user?.name} className="object-cover w-10 h-10 rounded-full" />
+                {showOptions ? <IoIosArrowUp className="absolute bottom-0 right-0 p-[2px] rounded-full bg-slate-200 text-slate-900" size={15} /> : <IoIosArrowDown className="absolute bottom-0 right-0 p-[2px] rounded-full bg-slate-200 text-slate-900" size={15} />}
+              </button>
+              {showOptions && (
+                <div className="absolute right-0 flex flex-col items-center justify-center p-6 bg-white border rounded-md shadow-lg border-slate-200 top-16 text-slate-800">
+                  <img src={user?.image as string} alt={user?.name} className="object-cover w-20 h-20 rounded-full" />
+                  <p className="mt-2 font-medium">{user?.name}</p>
+                  <p className="mb-4 text-slate-500">{user?.email}</p>
+                  <div className="flex flex-col w-full gap-2">
+                    <Button className="justify-between w-full" typebtn="button" type="transparentGrey" title="Pengaturan akun" href={SETTING}>
+                      Pengaturan akun
+                      <MdOutlineManageAccounts />
+                    </Button>
+                    <Button className="justify-between w-full" typebtn="button" type="transparentRed" title="Logout" onClick={logout}>
+                      Logout
+                      <MdOutlineLogout />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <li className="flex space-x-1">
+              {scroll ? (
+                <Button href="/login" type="transparentGrey">
+                  Log In
+                </Button>
+              ) : (
+                <Button href="/login" type="transparentWhite">
+                  Log In
+                </Button>
+              )}
+              <Button href={SIGNUP_PAGE} type="green">
+                Sign Up
               </Button>
-            ) : (
-              <Button href="/login" type="transparentWhite">
-                Log In
-              </Button>
-            )}
-            <Button href={SIGNUP_PAGE} type="green">
-              Sign Up
-            </Button>
-          </li>
+            </li>
+          )}
         </ul>
 
       </div>
